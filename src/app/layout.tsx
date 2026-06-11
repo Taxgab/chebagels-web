@@ -1,6 +1,19 @@
 import type { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/types";
+import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -81,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="h-full scroll-smooth">
+    <html lang="es" className={`h-full scroll-smooth ${playfair.variable} ${dmSans.variable}`}>
       <head>
         <script
           type="application/ld+json"
