@@ -1,6 +1,6 @@
 "use client";
 
-import { LOCATIONS, type Location } from "@/lib/types";
+import { LOCATIONS } from "@/lib/types";
 import { useState } from "react";
 
 export default function Locations() {

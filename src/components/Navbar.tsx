@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/types";
+import { SITE_CONFIG } from "@/lib/types";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
