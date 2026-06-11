@@ -99,15 +99,24 @@ function ProductCard({
 }) {
   return (
     <article
+      role="button"
+      tabIndex={0}
       className={cn(
         "group animate-on-scroll bg-white rounded-3xl overflow-hidden",
         "border border-warm-gray/20 shadow-lg shadow-ink/5",
         "hover:shadow-2xl hover:shadow-ink/10 hover:-translate-y-1",
         "transition-all duration-500 cursor-pointer",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame/50 focus-visible:ring-offset-2",
         isExpanded && "ring-2 ring-flame/30 shadow-xl shadow-flame/10"
       )}
       style={{ transitionDelay: `${index * 75}ms` }}
       onClick={onToggle}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onToggle();
+        }
+      }}
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-warm-gray/20">
         <img
