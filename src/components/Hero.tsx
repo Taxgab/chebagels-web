@@ -1,5 +1,3 @@
-"use client";
-
 import { SITE_CONFIG } from "@/lib/types";
 
 export default function Hero() {
