@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-ink">
@@ -9,13 +11,13 @@ export default function NotFound() {
         <p className="mt-2 text-warm-gray/50">
           Esta pagina no esta en el menu.
         </p>
-        <a
+        <Link
           href="/"
           className="mt-8 inline-block px-6 py-3 rounded-2xl bg-flame text-white font-semibold
                      hover:bg-flame-light transition-all duration-300 shadow-lg shadow-flame/25"
         >
           Volver al inicio
-        </a>
+        </Link>
       </div>
     </div>
   );
