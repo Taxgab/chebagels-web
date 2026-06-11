@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: SITE_CONFIG.ogImage,
-        width: 300,
-        height: 79,
+        width: 1200,
+        height: 630,
         type: "image/png",
       },
     ],
@@ -39,7 +39,14 @@ export const metadata: Metadata = {
     site: "@bagelsche",
     title: `${SITE_CONFIG.brandName}: Hacemos bagels artesanales, cada uno hecho a mano`,
     description: SITE_CONFIG.description,
-    images: [SITE_CONFIG.ogImage],
+    images: [
+      {
+        url: SITE_CONFIG.ogImage,
+        width: 1200,
+        height: 630,
+        type: "image/png",
+      },
+    ],
   },
   robots: { index: true, follow: true },
   icons: { icon: "/favicon.ico" },
