@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { SITE_CONFIG } from "@/lib/types";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { isIndexable, siteUrl } from "@/lib/site";
+import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -14,6 +15,8 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   display: "swap",
 });
+
+const ogTitle = `${SITE_CONFIG.brandName}: Hacemos bagels artesanales, cada uno hecho a mano`;
 
 export const metadata: Metadata = {
   title: {
@@ -24,46 +27,39 @@ export const metadata: Metadata = {
   keywords: [
     "che bagels",
     "bagels en Paraguay",
-    "bagels Asuncion",
+    "bagels Asunción",
     "bagels gourmet",
-    "Bagels Neoyorquinos",
-    "Bagels NY",
+    "bagels neoyorquinos",
     "bagels artesanales",
   ],
-  metadataBase: new URL(SITE_CONFIG.url),
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: siteUrl },
   openGraph: {
     type: "website",
     locale: "es_PY",
-    url: SITE_CONFIG.url,
+    url: siteUrl,
     siteName: `${SITE_CONFIG.brandName}: ${SITE_CONFIG.tagline}`,
-    title: `${SITE_CONFIG.brandName}: Hacemos bagels artesanales, cada uno hecho a mano`,
+    title: ogTitle,
     description: SITE_CONFIG.description,
-    images: [
-      {
-        url: SITE_CONFIG.ogImage,
-        width: 1200,
-        height: 630,
-        type: "image/png",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@bagelsche",
-    title: `${SITE_CONFIG.brandName}: Hacemos bagels artesanales, cada uno hecho a mano`,
+    title: ogTitle,
     description: SITE_CONFIG.description,
-    images: [
-      {
-        url: SITE_CONFIG.ogImage,
-        width: 1200,
-        height: 630,
-        type: "image/png",
-      },
-    ],
   },
-  robots: { index: true, follow: true },
+  // Only the production deployment may be indexed. Previews and branch
+  // deployments must never compete with the domain they will replace.
+  robots: isIndexable
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   icons: { icon: "/favicon.ico" },
-  alternates: { canonical: SITE_CONFIG.url },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f6efe3",
+  width: "device-width",
+  initialScale: 1,
 };
 
 const jsonLd = {
@@ -71,8 +67,7 @@ const jsonLd = {
   "@type": "Bakery",
   name: SITE_CONFIG.brandName,
   description: SITE_CONFIG.description,
-  url: SITE_CONFIG.url,
-  logo: SITE_CONFIG.ogImage,
+  url: siteUrl,
   sameAs: [
     "https://www.instagram.com/chebagels/",
     "https://www.tiktok.com/@chebagels",
@@ -81,7 +76,7 @@ const jsonLd = {
   ],
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Asuncion",
+    addressLocality: "Asunción",
     addressCountry: "PY",
   },
   servesCuisine: "Bagels",
@@ -94,39 +89,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`h-full scroll-smooth ${playfair.variable} ${dmSans.variable}`}>
+    <html
+      lang="es"
+      className={`h-full scroll-smooth ${fraunces.variable} ${dmSans.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
       </head>
-      <body className="min-h-full flex flex-col antialiased">
-        {children}
-        <ScrollObserver />
-      </body>
+      <body className="min-h-full flex flex-col antialiased">{children}</body>
     </html>
-  );
-}
-
-function ScrollObserver() {
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add('visible');
-                }
-              });
-            },
-            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-          );
-          document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
-        `,
-      }}
-    />
   );
 }
