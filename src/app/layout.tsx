@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { SITE_CONFIG } from "@/lib/types";
+import { LOCATIONS, SITE_CONFIG } from "@/lib/types";
 import { isIndexable, siteUrl } from "@/lib/site";
 import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
@@ -64,23 +64,50 @@ export const viewport: Viewport = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Bakery",
-  name: SITE_CONFIG.brandName,
-  description: SITE_CONFIG.description,
-  url: siteUrl,
-  sameAs: [
-    "https://www.instagram.com/chebagels/",
-    "https://www.tiktok.com/@chebagels",
-    "https://www.facebook.com/profile.php?id=61576231635295",
-    "https://x.com/bagelsche",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: SITE_CONFIG.brandName,
+      description: SITE_CONFIG.description,
+      url: siteUrl,
+      sameAs: [
+        "https://www.instagram.com/chebagels/",
+        "https://www.tiktok.com/@chebagels",
+        "https://www.facebook.com/profile.php?id=61576231635295",
+        "https://x.com/bagelsche",
+      ],
+    },
+    // One node per location. A single Bakery node with no locality, phone or
+    // geometry tells a search engine nothing about three separate storefronts.
+    ...LOCATIONS.map((location) => ({
+      "@type": "Bakery",
+      "@id": `${siteUrl}#${location.id}`,
+      name: `${SITE_CONFIG.brandName} — ${location.name}`,
+      parentOrganization: { "@id": `${siteUrl}#organization` },
+      url: siteUrl,
+      telephone: `+595${location.whatsapp.replace(/\D/g, "").slice(1)}`,
+      hasMap: location.mapsUrl,
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: location.coordinates.lat,
+        longitude: location.coordinates.lng,
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: location.locality,
+        addressCountry: "PY",
+      },
+      openingHoursSpecification: location.openingHours.map((slot) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: slot.days,
+        opens: slot.opens,
+        closes: slot.closes,
+      })),
+      servesCuisine: "Bagels",
+      priceRange: "$$",
+    })),
   ],
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Asunción",
-    addressCountry: "PY",
-  },
-  servesCuisine: "Bagels",
-  priceRange: "$$",
 };
 
 export default function RootLayout({

@@ -7,6 +7,12 @@ export interface Product {
   category: "salado" | "dulce" | "combo";
 }
 
+export interface OpeningHours {
+  days: readonly string[];
+  opens: string;
+  closes: string;
+}
+
 export interface Location {
   id: string;
   name: string;
@@ -14,6 +20,9 @@ export interface Location {
   whatsappUrl: string;
   mapsUrl: string;
   coordinates: { lat: number; lng: number };
+  /** City used in structured data. CDE is not in Asunción. */
+  locality: string;
+  openingHours: readonly OpeningHours[];
   hours: string;
 }
 
@@ -132,6 +141,11 @@ export const LOCATIONS = [
     whatsappUrl: "https://wa.me/595981134017",
     mapsUrl: "https://maps.app.goo.gl/U4TTZbCyhpCc1jmr9",
     coordinates: { lat: -25.2958524, lng: -57.5832832 },
+    locality: "Asunción",
+    openingHours: [
+      { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "21:00" },
+      { days: ["Sunday"], opens: "09:00", closes: "15:00" },
+    ],
     hours: "Lun a Sáb: 8:00 - 21:00 | Dom: 9:00 - 15:00",
   },
   {
@@ -141,6 +155,11 @@ export const LOCATIONS = [
     whatsappUrl: "https://wa.me/595972424660",
     mapsUrl: "https://maps.app.goo.gl/xpprxQ61hssENYsf8",
     coordinates: { lat: -25.2749125, lng: -57.5792031 },
+    locality: "Asunción",
+    openingHours: [
+      { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "21:00" },
+      { days: ["Sunday"], opens: "09:00", closes: "15:00" },
+    ],
     hours: "Lun a Sáb: 8:00 - 21:00 | Dom: 9:00 - 15:00",
   },
   {
@@ -150,6 +169,11 @@ export const LOCATIONS = [
     whatsappUrl: "https://wa.me/595973553211",
     mapsUrl: "https://maps.app.goo.gl/wuqFUhJbkP6QH4Vk6",
     coordinates: { lat: -25.5239444, lng: -54.6199347 },
+    locality: "Ciudad del Este",
+    openingHours: [
+      { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "21:00" },
+      { days: ["Sunday"], opens: "09:00", closes: "15:00" },
+    ],
     hours: "Lun a Sáb: 8:00 - 21:00 | Dom: 9:00 - 15:00",
   },
 ] as const satisfies readonly Location[];

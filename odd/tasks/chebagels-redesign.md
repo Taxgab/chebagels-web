@@ -113,9 +113,9 @@ not marking the LCP image eager.
 | T6 | done | — | Count-up removed; static server-rendered numbers |
 | T7 | done | — | Per-location coordinates recovered from the short links |
 | T8 | done | — | Single conversion block with both channels; dead h4 headings removed |
-| T9 | partial | — | OG image generated in-repo; JSON-LD still lacks per-location `LocalBusiness` |
-| T10 | done | — | `siteUrl`/`isIndexable` from deployment env; previews are `noindex` |
-| T11 | partial | — | Build + Lighthouse green; no mobile-viewport pass yet |
+| T9 | done | — | 3 `Bakery` nodes with phone, geo, locality and structured hours, plus an `Organization` |
+| T10 | done | — | `siteUrl`/`isIndexable` from explicit env vars; previews fail closed to `noindex` |
+| T11 | partial | — | Build, tsc, eslint and Lighthouse green; mobile viewport verified numerically, not visually |
 
 ## Verification evidence
 
