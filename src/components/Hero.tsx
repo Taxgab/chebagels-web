@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PRODUCTS, SITE_CONFIG } from "@/lib/types";
+import { LOCATIONS, PRODUCTS, SITE_CONFIG } from "@/lib/types";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 
@@ -45,7 +45,7 @@ export default function Hero() {
               <Button href={SITE_CONFIG.pedidosYaUrl} external size="lg">
                 Pedir por PedidosYa
               </Button>
-              <Button href="https://wa.me/595981134017" external variant="outline" size="lg">
+              <Button href={LOCATIONS[0].whatsappUrl} external variant="outline" size="lg">
                 WhatsApp
               </Button>
             </div>
@@ -78,7 +78,8 @@ export default function Hero() {
             src={heroProduct.imageUrl}
             alt={heroProduct.name}
             fill
-            preload
+            loading="eager"
+            fetchPriority="high"
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
           />

@@ -30,7 +30,6 @@ export interface SiteConfig {
   subheadline: string;
   description: string;
   url: string;
-  ogImage: string;
   pedidosYaUrl: string;
 }
 
@@ -186,7 +185,6 @@ export const SITE_CONFIG = {
   description:
     "#somoschebagels hacemos bagels artesanales, cada uno hecho a mano. Bagels Neoyorquinos en Asunción, Paraguay.",
   url: "https://chebagels.com",
-  ogImage: "https://chebagels.com/images/logo.png",
   pedidosYaUrl:
     "https://www.pedidosya.com.py/restaurants/asuncion/chebagels",
 } as const satisfies SiteConfig;

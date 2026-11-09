@@ -1,25 +1,16 @@
 import type { MetadataRoute } from "next";
-import { SITE_CONFIG } from "@/lib/types";
+import { siteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // One URL, because this is a single-page site. Fragment identifiers
+  // (#menu, #locales) are not separately indexable and do not belong in a
+  // sitemap.
   return [
     {
-      url: SITE_CONFIG.url,
+      url: siteUrl,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
-    },
-    {
-      url: `${SITE_CONFIG.url}#menu`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_CONFIG.url}#locales`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
     },
   ];
 }

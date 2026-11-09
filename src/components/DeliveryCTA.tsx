@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from "@/lib/types";
+import { LOCATIONS, SITE_CONFIG } from "@/lib/types";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 
@@ -28,7 +28,7 @@ export default function DeliveryCTA() {
               Pedir por PedidosYa
             </Button>
             <Button
-              href="https://wa.me/595981134017"
+              href={LOCATIONS[0].whatsappUrl}
               external
               variant="outlineLight"
               size="lg"

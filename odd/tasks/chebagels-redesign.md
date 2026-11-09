@@ -82,6 +82,25 @@ rewritten, new primitives, data migration). This exceeds the ~400 review
 budget, so a chain strategy is required before the first PR under
 `ask-on-risk`.
 
+## Review
+
+Fresh-context review of `main...HEAD` before the first push: **PASS WITH
+WARNINGS**, no blockers. Three findings were fixed in this branch:
+
+1. `robots.ts`/`sitemap.ts` hardcoded `SITE_CONFIG.url`, so every preview
+   advertised the production domain. Both now derive from `siteUrl`, and
+   non-production `robots.txt` disallows crawling. Fragment entries removed
+   from the sitemap (they are not separately indexable).
+2. Navbar links sat on the mobile hero photo at scroll 0 with no background.
+   The bar is now opaque on mobile.
+3. `ogImage` removed from `SITE_CONFIG`: it pointed at the legacy host.
+   `wa.me` links in Hero/DeliveryCTA now derive from `LOCATIONS[0]`.
+   Unused CSS (`.reveal`, `.bg-grain`, `animate-fade-up`) deleted.
+
+Also removed `preload` from the hero image in favour of
+`loading="eager"` + `fetchPriority="high"`: Next 16 flags `preload` alone as
+not marking the LCP image eager.
+
 ## Progress
 
 | Task | Status | Commit | Notes |
