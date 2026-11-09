@@ -43,12 +43,6 @@ export default function Navbar() {
             <span className="font-display text-lg font-semibold leading-none tracking-tight text-ink">
               Che Bagels
             </span>
-            <span
-              aria-hidden="true"
-              className="hidden text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-soft sm:inline"
-            >
-              Asunción
-            </span>
           </a>
 
           <div className="flex items-center gap-4 sm:gap-7">

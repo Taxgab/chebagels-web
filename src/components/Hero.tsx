@@ -5,6 +5,10 @@ import Button from "@/components/ui/Button";
 const heroProduct =
   PRODUCTS.find((p) => p.id === "desme-costilla-papas") ?? PRODUCTS[0];
 
+// Short editorial label: the full product name is too long for a hero caption
+// and breaks mid-word ("Coca-" / "Cola").
+const heroCaption = "Desme costilla";
+
 const BAND = [
   "Hecho a mano",
   "Bagels neoyorquinos",
@@ -90,7 +94,7 @@ export default function Hero() {
                 De la carta
               </p>
               <p className="mt-1 max-w-[16rem] font-display text-xl leading-tight text-paper sm:text-2xl">
-                {heroProduct.name}
+                {heroCaption}
               </p>
             </div>
             <span className="hidden shrink-0 rounded-sm border border-paper/30 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-paper/80 sm:block">
