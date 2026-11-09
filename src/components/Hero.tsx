@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { LOCATIONS, PRODUCTS, SITE_CONFIG } from "@/lib/types";
-import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 
 const heroProduct =
