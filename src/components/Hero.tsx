@@ -15,9 +15,9 @@ const BAND = [
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative bg-paper">
+    <section id="hero" className="relative overflow-hidden bg-paper">
       <div className="grid min-h-[100svh] grid-cols-1 lg:grid-cols-[1.04fr_0.96fr]">
-        <div className="order-2 flex flex-col justify-between gap-12 px-5 pb-14 pt-10 sm:px-8 lg:order-1 lg:px-12 lg:py-16">
+        <div className="relative z-10 order-2 flex min-w-0 flex-col justify-between gap-12 bg-paper px-5 pb-14 pt-10 sm:px-8 lg:order-1 lg:col-start-1 lg:row-start-1 lg:px-12 lg:py-16">
           <div className="flex items-center gap-3">
             <span className="h-px w-8 bg-ink/30" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink-soft">
@@ -27,10 +27,10 @@ export default function Hero() {
 
           <div className="max-w-xl">
             <h1 className="font-display leading-[0.84] tracking-[-0.035em] text-ink">
-              <span className="block text-[clamp(3.4rem,10vw,7.5rem)]">
+              <span className="block text-[clamp(2.8rem,7vw,6.5rem)]">
                 Bagels
               </span>
-              <span className="block text-[clamp(3.4rem,10vw,7.5rem)] italic text-wine">
+              <span className="block text-[clamp(2.8rem,7vw,6.5rem)] italic text-wine">
                 neoyorquinos
               </span>
             </h1>
@@ -72,7 +72,7 @@ export default function Hero() {
           </dl>
         </div>
 
-        <div className="relative order-1 h-[46svh] min-h-[320px] overflow-hidden bg-ink lg:order-2 lg:h-auto">
+        <div className="relative order-1 h-[46svh] min-h-[320px] overflow-hidden bg-ink lg:order-2 lg:col-start-2 lg:row-start-1 lg:h-auto">
           <Image
             src={heroProduct.imageUrl}
             alt={heroProduct.name}

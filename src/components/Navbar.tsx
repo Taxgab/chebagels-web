@@ -28,9 +28,10 @@ export default function Navbar() {
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
         scrolled
           ? "border-b border-ink/10 bg-paper/90 backdrop-blur-md"
-          : // Mobile puts the hero photo directly under the bar, so the nav
-            // needs its own background there instead of sitting on the image.
-            "border-b border-transparent bg-paper sm:bg-transparent",
+          : // The bar always carries its own background: at desktop the hero
+            // photo sits under the right half of it, and at mobile it sits
+            // under the whole bar. Transparent only works over flat paper.
+            "border-b border-transparent bg-paper",
       )}
     >
       <Container>
