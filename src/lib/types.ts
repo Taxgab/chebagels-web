@@ -13,7 +13,7 @@ export interface Location {
   whatsapp: string;
   whatsappUrl: string;
   mapsUrl: string;
-  mapsEmbedUrl: string;
+  coordinates: { lat: number; lng: number };
   hours: string;
 }
 
@@ -39,7 +39,7 @@ export const PRODUCTS = [
     id: "merienda",
     name: "Merienda o desayuno",
     description:
-      "Empieza bien el dia o hace una pausa como se debe. Siempre con bagels y cafe.",
+      "Empieza bien el día o hacé una pausa como se debe. Siempre con bagels y café.",
     imageUrl:
       "https://res.cloudinary.com/dftyzmbjc/image/upload/v1750443988/01_pjhdis.png",
     thumbnailUrl:
@@ -59,9 +59,9 @@ export const PRODUCTS = [
   },
   {
     id: "jamon-queso",
-    name: "Bagel de Jamon & Queso",
+    name: "Bagel de Jamón & Queso",
     description:
-      "El clasico nunca falla. Jamon, queso y esa textura que solo un bagel puede darte.",
+      "El clásico nunca falla. Jamón, queso y esa textura que solo un bagel puede darte.",
     imageUrl:
       "https://res.cloudinary.com/dftyzmbjc/image/upload/v1750443988/03_xwzsrz.png",
     thumbnailUrl:
@@ -92,9 +92,9 @@ export const PRODUCTS = [
   },
   {
     id: "salmon-ahumado",
-    name: "Salmon Ahumado",
+    name: "Salmón Ahumado",
     description:
-      "Fresco, elegante, irresistible. Salmon ahumado como te gusta.",
+      "Fresco, elegante, irresistible. Salmón ahumado como te gusta.",
     imageUrl:
       "https://res.cloudinary.com/dftyzmbjc/image/upload/v1750443988/06_arzrgh.png",
     thumbnailUrl:
@@ -105,7 +105,7 @@ export const PRODUCTS = [
     id: "desme-costilla-chopp",
     name: "Desme Costilla + chopp",
     description:
-      "Termina el dia como se debe: desme de costilla y un chopp bien frio.",
+      "Terminá el día como se debe: desme de costilla y un chopp bien frío.",
     imageUrl:
       "https://res.cloudinary.com/dftyzmbjc/image/upload/v1750443989/07_bdvhev.png",
     thumbnailUrl:
@@ -114,9 +114,9 @@ export const PRODUCTS = [
   },
   {
     id: "desme-costilla-papas",
-    name: "Desme Costilla con papas rusticas y Coca-Cola",
+    name: "Desme Costilla con papas rústicas y Coca-Cola",
     description:
-      "Sensual, jugoso y explosivo. Asi es nuestro Desme Costilla.",
+      "Sensual, jugoso y explosivo. Así es nuestro Desme Costilla.",
     imageUrl:
       "https://res.cloudinary.com/dftyzmbjc/image/upload/v1750443988/08_koxxpy.png",
     thumbnailUrl:
@@ -132,9 +132,8 @@ export const LOCATIONS = [
     whatsapp: "0981 134 017",
     whatsappUrl: "https://wa.me/595981134017",
     mapsUrl: "https://maps.app.goo.gl/U4TTZbCyhpCc1jmr9",
-    mapsEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.5500057765813!2d-57.55787262409685!3d-25.285635977640613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da9a2c3e50e6f%3A0x7a0794f70d1b9e87!2sChe%20Bagels!5e0!3m2!1ses!2spy!4v1712345678901",
-    hours: "Lun a Sab: 8:00 - 21:00 | Dom: 9:00 - 15:00",
+    coordinates: { lat: -25.2958524, lng: -57.5832832 },
+    hours: "Lun a Sáb: 8:00 - 21:00 | Dom: 9:00 - 15:00",
   },
   {
     id: "las-lomas",
@@ -142,9 +141,8 @@ export const LOCATIONS = [
     whatsapp: "0972 424 660",
     whatsappUrl: "https://wa.me/595972424660",
     mapsUrl: "https://maps.app.goo.gl/xpprxQ61hssENYsf8",
-    mapsEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.5500057765813!2d-57.55787262409685!3d-25.285635977640613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da9a2c3e50e6f%3A0x7a0794f70d1b9e87!2sChe%20Bagels!5e0!3m2!1ses!2spy!4v1723456789012",
-    hours: "Lun a Sab: 8:00 - 21:00 | Dom: 9:00 - 15:00",
+    coordinates: { lat: -25.2749125, lng: -57.5792031 },
+    hours: "Lun a Sáb: 8:00 - 21:00 | Dom: 9:00 - 15:00",
   },
   {
     id: "cde",
@@ -152,9 +150,8 @@ export const LOCATIONS = [
     whatsapp: "0973 553 211",
     whatsappUrl: "https://wa.me/595973553211",
     mapsUrl: "https://maps.app.goo.gl/wuqFUhJbkP6QH4Vk6",
-    mapsEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.5500057765813!2d-57.55787262409685!3d-25.285635977640613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da9a2c3e50e6f%3A0x7a0794f70d1b9e87!2sChe%20Bagels!5e0!3m2!1ses!2spy!4v1734567890123",
-    hours: "Lun a Sab: 8:00 - 21:00 | Dom: 9:00 - 15:00",
+    coordinates: { lat: -25.5239444, lng: -54.6199347 },
+    hours: "Lun a Sáb: 8:00 - 21:00 | Dom: 9:00 - 15:00",
   },
 ] as const satisfies readonly Location[];
 
@@ -187,7 +184,7 @@ export const SITE_CONFIG = {
   headline: "Bagels Neoyorquinos",
   subheadline: "en Paraguay",
   description:
-    "#somoschebagels hacemos bagels artesanales, cada uno hecho a mano. Bagels Neoyorquinos en Asuncion, Paraguay.",
+    "#somoschebagels hacemos bagels artesanales, cada uno hecho a mano. Bagels Neoyorquinos en Asunción, Paraguay.",
   url: "https://chebagels.com",
   ogImage: "https://chebagels.com/images/logo.png",
   pedidosYaUrl:

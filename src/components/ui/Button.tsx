@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "outline" | "whatsapp" | "ghost";
+type Variant = "primary" | "outline" | "whatsapp" | "ghost" | "light" | "outlineLight";
 type Size = "md" | "lg";
 
 const VARIANT: Record<Variant, string> = {
@@ -13,6 +13,10 @@ const VARIANT: Record<Variant, string> = {
     "bg-whatsapp text-white hover:brightness-110 focus-visible:ring-whatsapp focus-visible:ring-offset-paper",
   ghost:
     "px-0 py-1 text-ink underline decoration-1 underline-offset-4 hover:text-wine focus-visible:ring-wine focus-visible:ring-offset-paper",
+  light:
+    "bg-paper text-ink hover:bg-white focus-visible:ring-paper focus-visible:ring-offset-wine-deep",
+  outlineLight:
+    "border border-paper/40 text-paper hover:border-paper hover:bg-paper/10 focus-visible:ring-paper focus-visible:ring-offset-wine-deep",
 };
 
 const SIZE: Record<Size, string> = {

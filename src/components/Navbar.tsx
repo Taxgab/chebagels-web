@@ -1,93 +1,76 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 import { SITE_CONFIG } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
+
+const LINKS = [
+  { href: "#menu", label: "Carta" },
+  { href: "#locales", label: "Locales" },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    // Sync on mount: a reload restores scroll position before any event fires.
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
         scrolled
-          ? "bg-ink/95 backdrop-blur-xl shadow-2xl shadow-black/20 py-3"
-          : "bg-transparent py-5"
+          ? "border-b border-ink/10 bg-paper/90 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <button
-          onClick={() => scrollTo("hero")}
-          className="flex items-center gap-2 group"
-          aria-label="Ir al inicio"
-        >
-          <span className="text-2xl" aria-hidden="true">
-            🥯
-          </span>
-          <span
-            className={cn(
-              "font-display font-bold text-xl tracking-tight transition-colors",
-              scrolled ? "text-cream" : "text-cream"
-            )}
+      <Container>
+        <div className="flex h-16 items-center justify-between gap-4">
+          <a
+            href="#hero"
+            className="flex items-baseline gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wine focus-visible:ring-offset-4 focus-visible:ring-offset-paper"
           >
-            Che Bagels
-          </span>
-        </button>
-
-        <div className="hidden md:flex items-center gap-1">
-          {[
-            { id: "menu", label: "Menu" },
-            { id: "locales", label: "Locales" },
-          ].map((link) => (
-            <button
-              key={link.id}
-              onClick={() => scrollTo(link.id)}
-              className={cn(
-                "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
-                scrolled
-                  ? "text-warm-gray/80 hover:text-cream hover:bg-white/10"
-                  : "text-cream/80 hover:text-cream hover:bg-white/10"
-              )}
+            <span className="font-display text-lg font-semibold leading-none tracking-tight text-ink">
+              Che Bagels
+            </span>
+            <span
+              aria-hidden="true"
+              className="hidden text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-soft sm:inline"
             >
-              {link.label}
-            </button>
-          ))}
-          <a
-            href={SITE_CONFIG.pedidosYaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 px-5 py-2 rounded-full bg-flame text-white text-sm font-semibold
-                       hover:bg-flame-light transition-all duration-300 shadow-lg shadow-flame/25
-                       hover:shadow-flame/40 hover:-translate-y-0.5 active:scale-95"
-          >
-            Pedir Ahora
+              Asunción
+            </span>
           </a>
-        </div>
 
-        <div className="flex md:hidden items-center gap-2">
-          <a
-            href={SITE_CONFIG.pedidosYaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2 rounded-full bg-flame text-white text-xs font-semibold
-                       hover:bg-flame-light transition-all duration-300 shadow-lg shadow-flame/25"
-          >
-            Pedir
-          </a>
+          <div className="flex items-center gap-4 sm:gap-7">
+            <div className="flex items-center gap-4 sm:gap-6">
+              {LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wine focus-visible:ring-offset-4 focus-visible:ring-offset-paper sm:text-[11px]"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            <Button
+              href={SITE_CONFIG.pedidosYaUrl}
+              external
+              className="px-4 py-2.5 text-[10px] sm:px-6 sm:text-[11px]"
+            >
+              Pedir
+            </Button>
+          </div>
         </div>
-      </div>
+      </Container>
     </nav>
   );
 }

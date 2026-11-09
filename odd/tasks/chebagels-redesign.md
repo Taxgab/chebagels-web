@@ -86,31 +86,35 @@ budget, so a chain strategy is required before the first PR under
 
 | Task | Status | Commit | Notes |
 | --- | --- | --- | --- |
-| T1 | partial | — | Legacy copy captured in `odd/reference/legacy-copy.md`; `types.ts` not yet updated |
-| T2 | done | — | New palette + legacy aliases; Hero contrast passes Lighthouse |
+| T1 | done | — | Accents and voseo restored from the legacy reference; `imageUrl` is now the rendered asset |
+| T2 | done | — | New palette + legacy aliases; Lighthouse contrast clean |
 | T3 | done | — | `Container`, `Button`; reveal is CSS-only, no observer |
 | T4 | done | — | Two-column hero, real 1200x750 photo, `preload` (Next 16: `priority` deprecated) |
-| T5 | pending | — | |
-| T6 | pending | — | |
-| T7 | pending | — | |
-| T8 | pending | — | |
-| T9 | partial | — | OG image now generated in-repo at 1200x630 |
+| T5 | done | — | Filter rebuilt without the expand interaction; no hidden state to strand |
+| T6 | done | — | Count-up removed; static server-rendered numbers |
+| T7 | done | — | Per-location coordinates recovered from the short links |
+| T8 | done | — | Single conversion block with both channels; dead h4 headings removed |
+| T9 | partial | — | OG image generated in-repo; JSON-LD still lacks per-location `LocalBusiness` |
 | T10 | done | — | `siteUrl`/`isIndexable` from deployment env; previews are `noindex` |
-| T11 | pending | — | |
+| T11 | partial | — | Build + Lighthouse green; no mobile-viewport pass yet |
 
 ## Verification evidence
 
 - `npm run build`: PASS (Next 16.2.6, Turbopack, 7 static routes incl.
-  `/opengraph-image`).
-- Lighthouse on `localhost:3000`: Accessibility 0.95, Best Practices 1.0,
-  SEO 1.0.
-- Every remaining `color-contrast` failure belongs to a section that has not
-  been redesigned yet (`Menu`, `SocialProof`, `Footer`). The new Hero produces
-  none.
-- `heading-order` failure: `Footer` uses `h4` with no preceding `h3`.
-- `label-content-name-mismatch`: `Navbar` logo button has
-  `aria-label="Ir al inicio"` while its visible text is "Che Bagels".
+  `/opengraph-image`), re-run after every section was rebuilt.
+- Lighthouse on `localhost:3000`: **Accessibility 1.0, Best Practices 1.0,
+  SEO 1.0, zero failures.**
+- Category filter walked by hand: Dulces -> Salados renders 3 cards at
+  `opacity: 1`. The stranded-card bug is gone.
+- Location tabs: each of the three produces its own embed and all three
+  embeds return HTTP 200.
+  - Recoleta `-25.2958524, -57.5832832`
+  - Las Lomas `-25.2749125, -57.5792031`
+  - CDE `-25.5239444, -54.6199347`
+- Heading outline: `h1` -> `h2`/`h3` only. No skipped levels.
 - `meta robots` on a non-production deployment: `noindex, nofollow`.
 - `og:image` resolves to `/opengraph-image` inside the deployment and returns
   `200 image/png`.
 - Horizontal overflow at 1000px viewport: 0px.
+- Not yet verified: mobile viewport (no resize tool), production Lighthouse
+  performance budget.
